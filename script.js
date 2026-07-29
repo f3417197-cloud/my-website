@@ -1,122 +1,155 @@
+// ===== NOVA STORE =====
+
+// السلة
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let products = JSON.parse(localStorage.getItem("products")) || [];
 
-const count = document.getElementById("cartCount");
-count.textContent = cart.length;
-
-document.getElementById("shopBtn").addEventListener("click", () => {
-    document.querySelector(".products").scrollIntoView({
-        behavior:"smooth"
-    });
-});
-
-document.querySelectorAll(".product-card").forEach(card=>{
-
-    card.querySelector("button").addEventListener("click",()=>{
-
-        const name = card.querySelector("h3").textContent;
-        const price = card.querySelector("span").textContent;
-
-        cart.push({name,price});
-
-        localStorage.setItem("cart",JSON.stringify(cart));
-
-        count.textContent = cart.length;
-
-        alert("تمت الإضافة إلى السلة");
-
-    });
-
-});
-document.querySelector(".cart-icon").addEventListener("click",()=>{
-
-if(cart.length===0){
-alert("السلة فارغة 🛒");
-return;
-}
-
-let text="🛒 المنتجات:\n\n";
-
-cart.forEach((item,index)=>{
-text+=`${index+1}. ${item.name} - ${item.price}\n`;
-});
-
-alert(text);
-
-});
+// العناصر
+const productsContainer = document.querySelector(".products");
+const cartCount = document.getElementById("cartCount");
+const cartIcon = document.querySelector(".cart-icon");
 const cartPage = document.getElementById("cartPage");
 const cartItems = document.getElementById("cartItems");
 const cartTotal = document.getElementById("cartTotal");
+const closeCart = document.getElementById("closeCart");
 
-document.querySelector(".cart-icon").onclick = () => {
-    cartItems.innerHTML = "";
-    let total = 0;
-
-    cart.forEach(item => {
-        total += parseFloat(item.price);
-
-        cartItems.innerHTML += `
-        <div class="cart-item">
-            <span>${item.name}</span>
-            <span>${item.price}</span>
-        </div>`;
-    });
-
-    cartTotal.textContent = `المجموع: ${total}$`;
-    cartPage.style.display = "block";
-};
-
-document.getElementById("closeCart").onclick = () => {
-    cartPage.style.display = "none";
-};
-document.getElementById("addProductBtn").addEventListener("click",()=>{
-
-const name=document.getElementById("productName").value;
-const price=document.getElementById("productPrice").value;
-const image=document.getElementById("productImage").value;
-
-if(!name||!price||!image){
-alert("املأ جميع الحقول");
-return;
+// تحديث عداد السلة
+function updateCartCount() {
+    if (cartCount) {
+        cartCount.textContent = cart.length;
+    }
 }
 
-const products=document.querySelector(".products");
+updateCartCount();
+// عرض المنتجات المحفوظة
+function renderProducts() {
 
-products.innerHTML+=`
-<div class="product-card">
-<img src="${image}">
-<h3>${name}</h3>
-<p>منتج جديد</p>
-<span>${price}</span>
-<button>شراء الآن</button>
-</div>
-`;
+    document.querySelectorAll(".product-card.dynamic").forEach(card => {
+        card.remove();
+    });
 
-alert("تمت إضافة المنتج ✅");
+    products.forEach((product) => {
 
-});
-let savedProducts = JSON.parse(localStorage.getItem("products")) || [];
+        productsContainer.innerHTML += `
+        <div class="product-card dynamic">
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>منتج جديد</p>
+            <span>${product.price}</span>
+            <button class="buy-btn">شراء الآن</button>
+        </div>
+        `;
 
-savedProducts.forEach(product => {
-    document.querySelector(".products").innerHTML += `
-    <div class="product-card">
-        <img src="${product.image}">
-        <h3>${product.name}</h3>
-        <p>منتج جديد</p>
-        <span>${product.price}</span>
-        <button>شراء الآن</button>
-    </div>`;
-});
+    });
 
-document.getElementById("addProductBtn").addEventListener("click", () => {
+    attachBuyEvents();
+}
 
-    const product = {
-        name: document.getElementById("productName").value,
-        price: document.getElementById("productPrice").value,
-        image: document.getElementById("productImage").value
+renderProducts();
+// ربط أزرار الشراء
+function attachBuyEvents() {
+
+    document.querySelectorAll(".buy-btn").forEach(button => {
+
+        button.onclick = () => {
+
+            const card = button.closest(".product-card");
+
+            const name = card.querySelector("h3").textContent;
+            const price = card.querySelector("span").textContent;
+
+            cart.push({ name, price });
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            updateCartCount();
+
+            alert("تمت إضافة المنتج إلى السلة 🛒");
+
+        };
+
+    });
+
+}
+
+// ربط الأزرار الموجودة من البداية
+attachBuyEvents();
+// فتح السلة
+if (cartIcon) {
+    cartIcon.onclick = () => {
+
+        cartItems.innerHTML = "";
+
+        let total = 0;
+
+        cart.forEach((item) => {
+
+            total += parseFloat(item.price) || 0;
+
+            cartItems.innerHTML += `
+            <div class="cart-item">
+                <span>${item.name}</span>
+                <span>${item.price}</span>
+            </div>
+            `;
+        });
+
+        cartTotal.textContent = `المجموع: ${total}$`;
+
+        cartPage.style.display = "block";
+    };
+}
+
+// إغلاق السلة
+if (closeCart) {
+    closeCart.onclick = () => {
+        cartPage.style.display = "none";
+    };
+    }
+// إضافة منتج جديد
+const addProductBtn = document.getElementById("addProductBtn");
+
+if (addProductBtn) {
+
+    addProductBtn.onclick = () => {
+
+        const name = document.getElementById("productName").value.trim();
+        const price = document.getElementById("productPrice").value.trim();
+        const image = document.getElementById("productImage").value.trim();
+
+        if (!name || !price || !image) {
+            alert("املأ جميع الحقول");
+            return;
+        }
+
+        products.push({
+            name,
+            price,
+            image
+        });
+
+        localStorage.setItem("products", JSON.stringify(products));
+
+        renderProducts();
+
+        document.getElementById("productName").value = "";
+        document.getElementById("productPrice").value = "";
+        document.getElementById("productImage").value = "";
+
+        alert("تمت إضافة المنتج ✅");
     };
 
-    savedProducts.push(product);
+        }
+// زر ابدأ التسوق
+const shopBtn = document.getElementById("shopBtn");
 
-    localStorage.setItem("products", JSON.stringify(savedProducts));
+if (shopBtn) {
+    shopBtn.onclick = () => {
+        document.querySelector(".products").scrollIntoView({
+            behavior: "smooth"
+        });
+    };
+}
 
-});
+// حفظ عداد السلة عند تشغيل الموقع
+updateCartCount();
