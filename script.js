@@ -68,3 +68,29 @@ document.querySelector(".cart-icon").onclick = () => {
 document.getElementById("closeCart").onclick = () => {
     cartPage.style.display = "none";
 };
+document.getElementById("addProductBtn").addEventListener("click",()=>{
+
+const name=document.getElementById("productName").value;
+const price=document.getElementById("productPrice").value;
+const image=document.getElementById("productImage").value;
+
+if(!name||!price||!image){
+alert("املأ جميع الحقول");
+return;
+}
+
+const products=document.querySelector(".products");
+
+products.innerHTML+=`
+<div class="product-card">
+<img src="${image}">
+<h3>${name}</h3>
+<p>منتج جديد</p>
+<span>${price}</span>
+<button>شراء الآن</button>
+</div>
+`;
+
+alert("تمت إضافة المنتج ✅");
+
+});
