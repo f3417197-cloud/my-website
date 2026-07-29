@@ -94,3 +94,29 @@ products.innerHTML+=`
 alert("تمت إضافة المنتج ✅");
 
 });
+let savedProducts = JSON.parse(localStorage.getItem("products")) || [];
+
+savedProducts.forEach(product => {
+    document.querySelector(".products").innerHTML += `
+    <div class="product-card">
+        <img src="${product.image}">
+        <h3>${product.name}</h3>
+        <p>منتج جديد</p>
+        <span>${product.price}</span>
+        <button>شراء الآن</button>
+    </div>`;
+});
+
+document.getElementById("addProductBtn").addEventListener("click", () => {
+
+    const product = {
+        name: document.getElementById("productName").value,
+        price: document.getElementById("productPrice").value,
+        image: document.getElementById("productImage").value
+    };
+
+    savedProducts.push(product);
+
+    localStorage.setItem("products", JSON.stringify(savedProducts));
+
+});
