@@ -153,3 +153,26 @@ if (shopBtn) {
 
 // حفظ عداد السلة عند تشغيل الموقع
 updateCartCount();
+let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+document.addEventListener("click", (e) => {
+
+    if (e.target.classList.contains("fav-btn")) {
+
+        const card = e.target.closest(".product-card");
+
+        const name = card.querySelector("h3").textContent;
+
+        if (!favorites.includes(name)) {
+            favorites.push(name);
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+            e.target.textContent = "💖";
+        } else {
+            favorites = favorites.filter(item => item !== name);
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+            e.target.textContent = "❤️";
+        }
+
+    }
+
+});
