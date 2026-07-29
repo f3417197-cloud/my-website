@@ -176,3 +176,16 @@ document.addEventListener("click", (e) => {
     }
 
 });
+document.addEventListener("click", (e) => {
+
+    if (e.target.classList.contains("delete-btn")) {
+
+        if (confirm("حذف هذا المنتج؟")) {
+
+            e.target.closest(".product-card").remove();
+
+        }
+
+    }
+
+});
