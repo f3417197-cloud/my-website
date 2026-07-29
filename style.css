@@ -165,3 +165,29 @@ transition:.3s;
 .product-card button:hover{
 background:#2563eb;
 } 
+.features{
+padding:80px 8%;
+background:#0f172a;
+text-align:center;
+}
+
+.features h2{
+font-size:36px;
+margin-bottom:35px;
+}
+
+.feature-box{
+background:#1f2937;
+padding:20px;
+margin:20px auto;
+max-width:600px;
+border-radius:15px;
+font-size:20px;
+transition:.3s;
+box-shadow:0 8px 20px rgba(0,0,0,.3);
+}
+
+.feature-box:hover{
+transform:translateY(-5px);
+background:#273549;
+} 
