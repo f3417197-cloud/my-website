@@ -1,11 +1,28 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const shopBtn = document.getElementById("shopBtn");
+const cart = [];
 
-  shopBtn.addEventListener("click", () => {
-    alert("مرحباً بك في NOVA STORE 🚀");
-  });
+document.getElementById("shopBtn").addEventListener("click", () => {
+    document.querySelector(".products").scrollIntoView({
+        behavior: "smooth"
+    });
+});
 
-  localStorage.setItem("storeName", "NOVA STORE");
+document.querySelectorAll(".product-card").forEach(card => {
 
-  console.log("Store Loaded");
+    const button = card.querySelector("button");
+
+    button.addEventListener("click", () => {
+
+        const name = card.querySelector("h3").textContent;
+        const price = card.querySelector("span").textContent;
+
+        cart.push({
+            name,
+            price
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        alert(`تمت إضافة ${name} إلى السلة 🛒`);
+    });
+
 });
