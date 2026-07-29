@@ -22,7 +22,7 @@ document.querySelectorAll(".product-card").forEach(card=>{
 
         count.textContent = cart.length;
 
-        alert("تمت الإضافة إلى السلة 🛒");
+        alert("تمت الإضافة إلى السلة");
 
     });
 
