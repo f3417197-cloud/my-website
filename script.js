@@ -1,28 +1,29 @@
-const cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const count = document.getElementById("cartCount");
+count.textContent = cart.length;
 
 document.getElementById("shopBtn").addEventListener("click", () => {
     document.querySelector(".products").scrollIntoView({
-        behavior: "smooth"
+        behavior:"smooth"
     });
 });
 
-document.querySelectorAll(".product-card").forEach(card => {
+document.querySelectorAll(".product-card").forEach(card=>{
 
-    const button = card.querySelector("button");
-
-    button.addEventListener("click", () => {
+    card.querySelector("button").addEventListener("click",()=>{
 
         const name = card.querySelector("h3").textContent;
         const price = card.querySelector("span").textContent;
 
-        cart.push({
-            name,
-            price
-        });
+        cart.push({name,price});
 
-        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem("cart",JSON.stringify(cart));
 
-        alert(`تمت إضافة ${name} إلى السلة 🛒`);
+        count.textContent = cart.length;
+
+        alert("تمت الإضافة إلى السلة 🛒");
+
     });
 
 });
