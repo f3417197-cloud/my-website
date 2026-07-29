@@ -27,3 +27,19 @@ document.querySelectorAll(".product-card").forEach(card=>{
     });
 
 });
+document.querySelector(".cart-icon").addEventListener("click",()=>{
+
+if(cart.length===0){
+alert("السلة فارغة 🛒");
+return;
+}
+
+let text="🛒 المنتجات:\n\n";
+
+cart.forEach((item,index)=>{
+text+=`${index+1}. ${item.name} - ${item.price}\n`;
+});
+
+alert(text);
+
+});
