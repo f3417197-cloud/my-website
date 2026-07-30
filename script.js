@@ -1,8 +1,9 @@
 // ===== NOVA STORE =====
 
-// السلة
+// البيانات
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let products = JSON.parse(localStorage.getItem("products")) || [];
+let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
 // العناصر
 const productsContainer = document.querySelector(".products");
@@ -12,6 +13,7 @@ const cartPage = document.getElementById("cartPage");
 const cartItems = document.getElementById("cartItems");
 const cartTotal = document.getElementById("cartTotal");
 const closeCart = document.getElementById("closeCart");
+const addProductBtn = document.getElementById("addProductBtn");
 
 // تحديث عداد السلة
 function updateCartCount() {
@@ -24,91 +26,32 @@ updateCartCount();
 // عرض المنتجات المحفوظة
 function renderProducts() {
 
-    document.querySelectorAll(".product-card.dynamic").forEach(card => {
-        card.remove();
-    });
+    document.querySelectorAll(".dynamic").forEach(item => item.remove());
 
-    products.forEach((product) => {
+    products.forEach(product => {
 
-        productsContainer.innerHTML += `
+        productsContainer.insertAdjacentHTML("beforeend", `
         <div class="product-card dynamic">
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>منتج جديد</p>
             <span>${product.price}</span>
+
+            <button class="delete-btn">🗑️</button>
+            <button class="fav-btn">
+                ${favorites.includes(product.name) ? "💖" : "❤️"}
+            </button>
+
             <button class="buy-btn">شراء الآن</button>
         </div>
-        `;
+        `);
 
     });
 
-    attachBuyEvents();
 }
 
 renderProducts();
-// ربط أزرار الشراء
-function attachBuyEvents() {
-
-    document.querySelectorAll(".buy-btn").forEach(button => {
-
-        button.onclick = () => {
-
-            const card = button.closest(".product-card");
-
-            const name = card.querySelector("h3").textContent;
-            const price = card.querySelector("span").textContent;
-
-            cart.push({ name, price });
-
-            localStorage.setItem("cart", JSON.stringify(cart));
-
-            updateCartCount();
-
-            alert("تمت إضافة المنتج إلى السلة 🛒");
-
-        };
-
-    });
-
-}
-
-// ربط الأزرار الموجودة من البداية
-attachBuyEvents();
-// فتح السلة
-if (cartIcon) {
-    cartIcon.onclick = () => {
-
-        cartItems.innerHTML = "";
-
-        let total = 0;
-
-        cart.forEach((item) => {
-
-            total += parseFloat(item.price) || 0;
-
-            cartItems.innerHTML += `
-            <div class="cart-item">
-                <span>${item.name}</span>
-                <span>${item.price}</span>
-            </div>
-            `;
-        });
-
-        cartTotal.textContent = `المجموع: ${total}$`;
-
-        cartPage.style.display = "block";
-    };
-}
-
-// إغلاق السلة
-if (closeCart) {
-    closeCart.onclick = () => {
-        cartPage.style.display = "none";
-    };
-    }
 // إضافة منتج جديد
-const addProductBtn = document.getElementById("addProductBtn");
-
 if (addProductBtn) {
 
     addProductBtn.onclick = () => {
@@ -122,11 +65,9 @@ if (addProductBtn) {
             return;
         }
 
-        products.push({
-            name,
-            price,
-            image
-        });
+        const product = { name, price, image };
+
+        products.push(product);
 
         localStorage.setItem("products", JSON.stringify(products));
 
@@ -137,55 +78,114 @@ if (addProductBtn) {
         document.getElementById("productImage").value = "";
 
         alert("تمت إضافة المنتج ✅");
+
     };
 
-        }
-// زر ابدأ التسوق
-const shopBtn = document.getElementById("shopBtn");
-
-if (shopBtn) {
-    shopBtn.onclick = () => {
-        document.querySelector(".products").scrollIntoView({
-            behavior: "smooth"
-        });
-    };
-}
-
-// حفظ عداد السلة عند تشغيل الموقع
-updateCartCount();
-let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
+            }
+// الأحداث (شراء - مفضلة - حذف)
 document.addEventListener("click", (e) => {
 
-    if (e.target.classList.contains("fav-btn")) {
+    // شراء
+    if (e.target.classList.contains("buy-btn")) {
 
         const card = e.target.closest(".product-card");
 
         const name = card.querySelector("h3").textContent;
+        const price = card.querySelector("span").textContent;
 
-        if (!favorites.includes(name)) {
-            favorites.push(name);
-            localStorage.setItem("favorites", JSON.stringify(favorites));
-            e.target.textContent = "💖";
-        } else {
-            favorites = favorites.filter(item => item !== name);
-            localStorage.setItem("favorites", JSON.stringify(favorites));
-            e.target.textContent = "❤️";
-        }
+        cart.push({ name, price });
 
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        updateCartCount();
+
+        alert("تمت إضافة المنتج إلى السلة 🛒");
     }
 
-});
-document.addEventListener("click", (e) => {
+    // مفضلة
+    if (e.target.classList.contains("fav-btn")) {
 
+        const card = e.target.closest(".product-card");
+        const name = card.querySelector("h3").textContent;
+
+        if (favorites.includes(name)) {
+            favorites = favorites.filter(item => item !== name);
+            e.target.textContent = "❤️";
+        } else {
+            favorites.push(name);
+            e.target.textContent = "💖";
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+
+    // حذف
     if (e.target.classList.contains("delete-btn")) {
 
-        if (confirm("حذف هذا المنتج؟")) {
+        if (!confirm("حذف المنتج؟")) return;
 
-            e.target.closest(".product-card").remove();
+        const card = e.target.closest(".product-card");
+        const name = card.querySelector("h3").textContent;
 
-        }
+        card.remove();
 
+        products = products.filter(p => p.name !== name);
+
+        localStorage.setItem("products", JSON.stringify(products));
     }
 
 });
+// فتح وإغلاق السلة
+if (cartIcon) {
+
+    cartIcon.onclick = () => {
+
+        cartItems.innerHTML = "";
+
+        let total = 0;
+
+        cart.forEach(item => {
+
+            total += parseFloat(item.price) || 0;
+
+            cartItems.innerHTML += `
+            <div class="cart-item">
+                <span>${item.name}</span>
+                <span>${item.price}</span>
+            </div>
+            `;
+
+        });
+
+        cartTotal.textContent = `المجموع: ${total}$`;
+
+        cartPage.style.display = "block";
+
+    };
+
+}
+
+if (closeCart) {
+
+    closeCart.onclick = () => {
+
+        cartPage.style.display = "none";
+
+    };
+
+}
+
+// زر ابدأ التسوق
+const shopBtn = document.getElementById("shopBtn");
+
+if (shopBtn) {
+
+    shopBtn.onclick = () => {
+
+        document.querySelector(".products").scrollIntoView({
+            behavior: "smooth"
+        });
+
+    };
+
+            }
