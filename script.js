@@ -2,7 +2,25 @@
 
 // البيانات
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let products = JSON.parse(localStorage.getItem("products")) || [];
+let defaultProducts = [
+{
+name:"حذاء رياضي",
+price:"59$",
+image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+},
+{
+name:"ساعة ذكية",
+price:"89$",
+image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"
+}
+];
+
+let products = JSON.parse(localStorage.getItem("products"));
+
+if(!products){
+products = defaultProducts;
+localStorage.setItem("products", JSON.stringify(products));
+}
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
 // العناصر
