@@ -121,7 +121,23 @@ document.addEventListener("click", (e) => {
 
         alert("تمت إضافة المنتج إلى السلة 🛒");
     }
+// تعديل
+if (e.target.classList.contains("edit-btn")) {
 
+    const card = e.target.closest(".product-card");
+
+    document.getElementById("productName").value =
+        card.querySelector("h3").textContent;
+
+    document.getElementById("productPrice").value =
+        card.querySelector("span").textContent;
+
+    document.getElementById("productImage").value =
+        card.querySelector("img").src;
+
+    alert("تم تحميل بيانات المنتج للتعديل ✏️");
+
+}
     // مفضلة
     if (e.target.classList.contains("fav-btn")) {
 
