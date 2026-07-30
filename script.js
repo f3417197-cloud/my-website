@@ -54,12 +54,15 @@ function renderProducts() {
             <p>منتج جديد</p>
             <span>${product.price}</span>
 
-            <button class="delete-btn">🗑️</button>
-            <button class="fav-btn">
-                ${favorites.includes(product.name) ? "💖" : "❤️"}
-            </button>
+        <button class="delete-btn">🗑️</button>
 
-            <button class="buy-btn">شراء الآن</button>
+<button class="edit-btn">✏️</button>
+
+<button class="fav-btn">
+    ${favorites.includes(product.name) ? "💖" : "❤️"}
+</button>
+
+<button class="buy-btn">شراء الآن</button>
         </div>
         `);
 
