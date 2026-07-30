@@ -22,7 +22,7 @@ products = defaultProducts;
 localStorage.setItem("products", JSON.stringify(products));
 }
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
+let editingIndex = -1;
 // العناصر
 const productsContainer = document.querySelector(".products");
 const cartCount = document.getElementById("cartCount");
