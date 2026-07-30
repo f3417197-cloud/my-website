@@ -125,7 +125,7 @@ document.addEventListener("click", (e) => {
 if (e.target.classList.contains("edit-btn")) {
 
     const card = e.target.closest(".product-card");
-
+editingIndex = [...document.querySelectorAll(".product-card")].indexOf(card);
     document.getElementById("productName").value =
         card.querySelector("h3").textContent;
 
