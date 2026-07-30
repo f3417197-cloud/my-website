@@ -296,3 +296,14 @@ cursor:pointer;
 #editProductBtn:hover{
     background:#e68900;
 }
+.rating{
+    color:#FFD700;
+    font-size:18px;
+    margin:8px 0;
+    font-weight:bold;
+}
+
+.rating span{
+    color:#888;
+    font-size:14px;
+} 
