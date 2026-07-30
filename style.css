@@ -10,6 +10,7 @@ background:#0f172a;
 color:#fff;
 }
 
+}
 .header{
 position:fixed;
 top:0;
@@ -18,12 +19,13 @@ left:0;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:18px 8%;
-background:rgba(15,23,42,.9);
-backdrop-filter:blur(10px);
-border-bottom:1px solid rgba(255,255,255,.08);
+padding:12px 6%;
+background:rgba(15,23,42,.95);
+backdrop-filter:blur(15px);
+border-bottom:1px solid rgba(255,255,255,.06);
+box-shadow:0 4px 20px rgba(0,0,0,.25);
 z-index:1000;
-}
+} 
 
 .logo{
 font-size:28px;
@@ -133,7 +135,6 @@ max-width:320px;
 text-align:center;
 box-shadow:0 10px 30px rgba(0,0,0,.3);
 transition:.3s;
-}
 
 .product-card:hover{
 transform:translateY(-8px);
