@@ -167,17 +167,20 @@ margin-bottom:15px;
 }
 
 .product-card button{
-background:#3b82f6;
+background:#2563eb;
 color:#fff;
 border:none;
-padding:12px 25px;
-border-radius:10px;
+padding:10px 18px;
+border-radius:14px;
 cursor:pointer;
 transition:.3s;
+font-weight:600;
+margin:4px;
 }
 
 .product-card button:hover{
-background:#2563eb;
+background:#1d4ed8;
+transform:translateY(-2px);
 } 
 .features{
 padding:80px 8%;
