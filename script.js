@@ -101,7 +101,7 @@ if (editingIndex === -1) {
 localStorage.setItem("products", JSON.stringify(products));
 
 renderProducts();
-
+addProductBtn.textContent = "إضافة المنتج";
         document.getElementById("productName").value = "";
         document.getElementById("productPrice").value = "";
         document.getElementById("productImage").value = "";
