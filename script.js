@@ -51,7 +51,9 @@ function renderProducts() {
         <div class="product-card dynamic">
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
-            <p>منتج جديد</p>
+            <p class="rating">⭐⭐⭐⭐⭐ <span>(4.9)</span></p>
+
+<p>منتج جديد</p>
             <span>${product.price}</span>
 
         <button class="delete-btn">🗑️</button>
