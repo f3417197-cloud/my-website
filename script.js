@@ -84,14 +84,23 @@ if (addProductBtn) {
             alert("املأ جميع الحقول");
             return;
         }
+const product = { name, price, image };
 
-        const product = { name, price, image };
+if (editingIndex === -1) {
 
-        products.push(product);
+    products.push(product);
 
-        localStorage.setItem("products", JSON.stringify(products));
+} else {
 
-        renderProducts();
+    products[editingIndex] = product;
+
+    editingIndex = -1;
+
+}
+
+localStorage.setItem("products", JSON.stringify(products));
+
+renderProducts();
 
         document.getElementById("productName").value = "";
         document.getElementById("productPrice").value = "";
