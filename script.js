@@ -32,7 +32,7 @@ const cartItems = document.getElementById("cartItems");
 const cartTotal = document.getElementById("cartTotal");
 const closeCart = document.getElementById("closeCart");
 const addProductBtn = document.getElementById("addProductBtn");
-
+const editProductBtn = document.getElementById("editProductBtn");
 // تحديث عداد السلة
 function updateCartCount() {
     if (cartCount) {
@@ -207,3 +207,8 @@ if (shopBtn) {
     };
 
             }
+editProductBtn.onclick = () => {
+
+    alert("ميزة تعديل المنتج سنكملها بالخطوة القادمة ✅");
+
+};
