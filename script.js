@@ -143,7 +143,7 @@ editingIndex = [...document.querySelectorAll(".product-card")].indexOf(card);
 
     document.getElementById("productImage").value =
         card.querySelector("img").src;
-
+addProductBtn.textContent = "حفظ التعديل";
     alert("تم تحميل بيانات المنتج للتعديل ✏️");
 
 }
