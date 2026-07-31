@@ -38,7 +38,7 @@ description:"New Product"
 
 localStorage.setItem("products",JSON.stringify(products));
 
-renderProducts();
+location.reload();
 
 alert("Product Added Successfully");
 
