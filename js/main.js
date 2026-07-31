@@ -66,3 +66,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+document.getElementById("adminPanel").onclick = openAdmin;
