@@ -1,41 +1,45 @@
-// ===============================
-// ADMIN PANEL
-// ===============================
+const adminPassword = "nova2026";
 
-function addProduct(product){
+function openAdmin(){
 
-products.push(product);
+const pass = prompt("Enter Admin Password");
 
-renderProducts();
+if(pass !== adminPassword){
 
-}
+alert("Wrong Password");
 
-function deleteProduct(id){
-
-const index = products.findIndex(
-p => p.id === id
-);
-
-if(index !== -1){
-
-products.splice(index,1);
-
-renderProducts();
+return;
 
 }
 
-}
+const name = prompt("Product Name");
 
-function editProduct(id,newData){
+if(!name) return;
 
-const product = products.find(
-p => p.id === id
-);
+const price = prompt("Price");
 
-if(!product) return;
+const image = prompt("Image URL");
 
-Object.assign(product,newData);
+const rating = prompt("Rating (1-5)");
+
+products.push({
+
+name:name,
+
+price:Number(price),
+
+image:image,
+
+rating:Number(rating),
+
+description:"New Product"
+
+});
+
+localStorage.setItem("products",JSON.stringify(products));
 
 renderProducts();
 
-  }
+alert("Product Added Successfully");
+
+}
