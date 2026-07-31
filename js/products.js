@@ -54,3 +54,11 @@ const products = [
 }
 
 ];
+// تحميل المنتجات المحفوظة
+
+const savedProducts = JSON.parse(localStorage.getItem("products"));
+
+if (savedProducts && savedProducts.length > 0) {
+    products.length = 0;
+    savedProducts.forEach(product => products.push(product));
+}
