@@ -664,3 +664,102 @@ font-size:15px;
 letter-spacing:1px;
 
    }
+/* ===========================
+   CONTACT
+=========================== */
+
+.contact{
+
+background:#0b1120;
+
+text-align:center;
+
+}
+
+.contact h2{
+
+font-size:42px;
+
+margin-bottom:25px;
+
+}
+
+.contact p{
+
+font-size:18px;
+
+color:#b8c0cc;
+
+margin:12px 0;
+
+}
+
+/* ===========================
+   ABOUT
+=========================== */
+
+.about{
+
+background:#111827;
+
+text-align:center;
+
+}
+
+.about h2{
+
+font-size:42px;
+
+margin-bottom:25px;
+
+}
+
+.about p{
+
+max-width:900px;
+
+margin:auto;
+
+font-size:19px;
+
+line-height:2;
+
+color:#cfd6e4;
+
+}
+
+/* ===========================
+Responsive
+=========================== */
+
+@media(max-width:900px){
+
+.navbar{
+
+display:none;
+
+}
+
+.hero h1{
+
+font-size:42px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+}
+
+.products h2,
+.categories h2,
+.offers h2,
+.about h2,
+.contact h2{
+
+font-size:32px;
+
+}
+
+}
