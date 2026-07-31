@@ -78,3 +78,83 @@ document.getElementById("cartCount");
 
 const favCount =
 document.getElementById("favCount");
+/* ===========================
+   عرض المنتجات
+=========================== */
+
+function renderProducts(){
+
+productsContainer.innerHTML = "";
+
+products.forEach(product=>{
+
+productsContainer.innerHTML += `
+
+<div class="product-card">
+
+${product.badge ? `<div class="badge">${product.badge}</div>` : ""}
+
+<img src="${product.image}" alt="${product.name}">
+
+<div class="product-info">
+
+<h3 class="product-title">${product.name}</h3>
+
+<p class="product-description">
+${product.description}
+</p>
+
+<p class="product-rating">
+⭐ ${product.rating}
+</p>
+
+<p class="product-shipping">
+🚚 ${product.shipping}
+</p>
+
+<p class="product-price">
+${STORE.currency}${product.price}
+</p>
+
+<div class="product-buttons">
+
+<button class="buy-btn"
+onclick="addToCart(${product.id})">
+
+Add To Cart
+
+</button>
+
+<button class="fav-btn"
+onclick="addToWishlist(${product.id})">
+
+❤
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+renderProducts();
+/* ===========================
+   عدادات
+=========================== */
+
+function updateCounters(){
+
+cartCount.textContent = cart.length;
+
+favCount.textContent = wishlist.length;
+
+}
+
+updateCounters();
