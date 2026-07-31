@@ -158,3 +158,48 @@ favCount.textContent = wishlist.length;
 }
 
 updateCounters();
+/* ===========================
+   إضافة للسلة
+=========================== */
+
+function addToCart(id){
+
+const product = products.find(p => p.id === id);
+
+cart.push(product);
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+updateCounters();
+
+alert(product.name + " تمت إضافته إلى السلة");
+
+}
+
+/* ===========================
+   إضافة للمفضلة
+=========================== */
+
+function addToWishlist(id){
+
+const product = products.find(p => p.id === id);
+
+const exists = wishlist.find(p => p.id === id);
+
+if(exists){
+
+alert("المنتج موجود بالمفضلة");
+
+return;
+
+}
+
+wishlist.push(product);
+
+localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+updateCounters();
+
+alert(product.name + " تمت إضافته إلى المفضلة");
+
+}
