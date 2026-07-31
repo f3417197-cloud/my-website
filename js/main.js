@@ -8,7 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("productsContainer");
 
     if (!container) return;
-
+if(localStorage.getItem("products")){
+    products.length = 0;
+    JSON.parse(localStorage.getItem("products")).forEach(p=>products.push(p));
+}
     renderProducts();
 
     function renderProducts() {
