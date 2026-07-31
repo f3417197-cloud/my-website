@@ -763,3 +763,50 @@ font-size:32px;
 }
 
 }
+/* ===========================
+ADMIN BUTTON
+=========================== */
+
+.admin-panel{
+
+position:fixed;
+
+bottom:25px;
+
+left:25px;
+
+z-index:9999;
+
+}
+
+#adminButton{
+
+background:#2563eb;
+
+color:#fff;
+
+border:none;
+
+padding:15px 25px;
+
+border-radius:15px;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+box-shadow:0 10px 30px rgba(37,99,235,.4);
+
+transition:.3s;
+
+}
+
+#adminButton:hover{
+
+transform:translateY(-3px);
+
+background:#1d4ed8;
+
+}
