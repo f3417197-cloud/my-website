@@ -49,15 +49,11 @@ addBtn.addEventListener("click", () => {
         description
     };
 
-    products.push(product);
+products.push(product);
 
-    localStorage.setItem("products", JSON.stringify(products));
+localStorage.setItem("products", JSON.stringify(products));
 
-    if (typeof renderProducts === "function") {
-        renderProducts();
-    } else {
-        location.reload();
-    }
+location.reload();
 
     document.getElementById("productName").value = "";
     document.getElementById("productPrice").value = "";
