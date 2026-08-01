@@ -24,3 +24,23 @@ adminButton.addEventListener("click", () => {
     }
 
 });
+document.getElementById("addProductBtn").onclick = function () {
+
+const product = {
+    id: Date.now(),
+    name: document.getElementById("productName").value,
+    price: Number(document.getElementById("productPrice").value),
+    image: document.getElementById("productImage").value,
+    rating: Number(document.getElementById("productRating").value),
+    description: document.getElementById("productDescription").value
+};
+
+products.push(product);
+
+localStorage.setItem("products", JSON.stringify(products));
+
+renderProducts();
+
+alert("تمت إضافة المنتج");
+
+};
