@@ -1,13 +1,14 @@
 // ===============================
-// ADMIN PANEL
+// NOVA STORE - ADMIN
 // ===============================
 
 const adminPassword = "nova2026";
 
 const adminButton = document.getElementById("adminButton");
 const adminBox = document.getElementById("adminBox");
-const addProductBtn = document.getElementById("addProductBtn");
+const addBtn = document.getElementById("addProductBtn");
 
+// فتح وإغلاق لوحة الإدارة
 adminButton.addEventListener("click", () => {
 
     const pass = prompt("Enter Admin Password");
@@ -17,37 +18,53 @@ adminButton.addEventListener("click", () => {
         return;
     }
 
-    adminBox.style.display =
-    adminBox.style.display === "block"
-    ? "none"
-    : "block";
+    if (adminBox.style.display === "block") {
+        adminBox.style.display = "none";
+    } else {
+        adminBox.style.display = "block";
+    }
 
 });
 
-addProductBtn.addEventListener("click", () => {
+// إضافة منتج
+addBtn.addEventListener("click", () => {
+
+    const name = document.getElementById("productName").value.trim();
+    const price = Number(document.getElementById("productPrice").value);
+    const image = document.getElementById("productImage").value.trim();
+    const rating = Number(document.getElementById("productRating").value);
+    const description = document.getElementById("productDescription").value.trim();
+
+    if (!name || !price || !image) {
+        alert("املأ جميع الحقول");
+        return;
+    }
 
     const product = {
-
         id: Date.now(),
-
-        name: document.getElementById("productName").value,
-
-        price: Number(document.getElementById("productPrice").value),
-
-        image: document.getElementById("productImage").value,
-
-        rating: Number(document.getElementById("productRating").value),
-
-        description: document.getElementById("productDescription").value
-
+        name,
+        price,
+        image,
+        rating,
+        description
     };
 
     products.push(product);
 
     localStorage.setItem("products", JSON.stringify(products));
 
-    renderProducts();
+    if (typeof renderProducts === "function") {
+        renderProducts();
+    } else {
+        location.reload();
+    }
 
-    alert("تمت إضافة المنتج");
+    document.getElementById("productName").value = "";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productImage").value = "";
+    document.getElementById("productRating").value = "";
+    document.getElementById("productDescription").value = "";
+
+    alert("✅ تمت إضافة المنتج");
 
 });
