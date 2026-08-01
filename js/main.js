@@ -3,7 +3,7 @@
 // MAIN
 // ===============================
 
-// تحميل المنتجات
+// تحميل المنتجات المحفوظة
 const savedProducts = JSON.parse(localStorage.getItem("products"));
 
 if (savedProducts && savedProducts.length > 0) {
@@ -54,8 +54,6 @@ function renderProducts() {
 document.addEventListener("DOMContentLoaded", () => {
     renderProducts();
 });
-// أزرار السلة والمفضلة
-
 document.addEventListener("click", (e) => {
 
     // إضافة للسلة
@@ -74,12 +72,12 @@ document.addEventListener("click", (e) => {
 
         const index = [...document.querySelectorAll(".fav-btn")].indexOf(e.target);
 
-if (typeof toggleWishlist === "function") {
-    toggleWishlist(products[index].id);
-}
+        if (typeof toggleWishlist === "function") {
+            toggleWishlist(products[index].id);
+        }
 
-}
+    }
 
 });
 
-window.renderProducts = renderProducts;        
+window.renderProducts = renderProducts;
