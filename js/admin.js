@@ -6,8 +6,8 @@ const adminPassword = "nova2026";
 
 const adminButton = document.getElementById("adminButton");
 const adminBox = document.getElementById("adminBox");
+const addProductBtn = document.getElementById("addProductBtn");
 
-// فتح لوحة الإدارة
 adminButton.addEventListener("click", () => {
 
     const pass = prompt("Enter Admin Password");
@@ -17,30 +17,37 @@ adminButton.addEventListener("click", () => {
         return;
     }
 
-    if (adminBox.style.display === "block") {
-        adminBox.style.display = "none";
-    } else {
-        adminBox.style.display = "block";
-    }
+    adminBox.style.display =
+    adminBox.style.display === "block"
+    ? "none"
+    : "block";
 
 });
-document.getElementById("addProductBtn").onclick = function () {
 
-const product = {
-    id: Date.now(),
-    name: document.getElementById("productName").value,
-    price: Number(document.getElementById("productPrice").value),
-    image: document.getElementById("productImage").value,
-    rating: Number(document.getElementById("productRating").value),
-    description: document.getElementById("productDescription").value
-};
+addProductBtn.addEventListener("click", () => {
 
-products.push(product);
+    const product = {
 
-localStorage.setItem("products", JSON.stringify(products));
+        id: Date.now(),
 
-renderProducts();
+        name: document.getElementById("productName").value,
 
-alert("تمت إضافة المنتج");
+        price: Number(document.getElementById("productPrice").value),
 
-};
+        image: document.getElementById("productImage").value,
+
+        rating: Number(document.getElementById("productRating").value),
+
+        description: document.getElementById("productDescription").value
+
+    };
+
+    products.push(product);
+
+    localStorage.setItem("products", JSON.stringify(products));
+
+    renderProducts();
+
+    alert("تمت إضافة المنتج");
+
+});
