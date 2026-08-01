@@ -74,4 +74,12 @@ document.addEventListener("click", (e) => {
 
         const index = [...document.querySelectorAll(".fav-btn")].indexOf(e.target);
 
-        if (typeof toggleWishlist
+if (typeof toggleWishlist === "function") {
+    toggleWishlist(products[index].id);
+}
+
+}
+
+});
+
+window.renderProducts = renderProducts;        
