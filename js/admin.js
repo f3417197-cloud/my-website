@@ -1,45 +1,26 @@
+// ===============================
+// ADMIN PANEL
+// ===============================
+
 const adminPassword = "nova2026";
 
-function openAdmin(){
+const adminButton = document.getElementById("adminButton");
+const adminBox = document.getElementById("adminBox");
 
-const pass = prompt("Enter Admin Password");
+// فتح لوحة الإدارة
+adminButton.addEventListener("click", () => {
 
-if(pass !== adminPassword){
+    const pass = prompt("Enter Admin Password");
 
-alert("Wrong Password");
+    if (pass !== adminPassword) {
+        alert("Wrong Password");
+        return;
+    }
 
-return;
-
-}
-
-const name = prompt("Product Name");
-
-if(!name) return;
-
-const price = prompt("Price");
-
-const image = prompt("Image URL");
-
-const rating = prompt("Rating (1-5)");
-
-products.push({
-
-name:name,
-
-price:Number(price),
-
-image:image,
-
-rating:Number(rating),
-
-description:"New Product"
+    if (adminBox.style.display === "block") {
+        adminBox.style.display = "none";
+    } else {
+        adminBox.style.display = "block";
+    }
 
 });
-
-localStorage.setItem("products",JSON.stringify(products));
-
-location.reload();
-
-alert("Product Added Successfully");
-
-}
