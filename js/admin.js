@@ -52,7 +52,7 @@ addBtn.addEventListener("click", () => {
 products.push(product);
 
 localStorage.setItem("products", JSON.stringify(products));
-
+console.log(localStorage.getItem("products"));
 location.reload();
 
     document.getElementById("productName").value = "";
